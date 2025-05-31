@@ -1,70 +1,93 @@
-# 用nodejs和midi接口写一个在线弹奏钢琴的网站
-基于 Vue + Vite
- 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# 在线钢琴（Online Piano）
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+一个基于 Vue 3 + Vite 的在线钢琴应用，支持键盘演奏、MIDI 设备连接和多种乐器音色。
 
+## 功能特点
 
-现在我们已经有了基本的项目环境，让我为您创建必要的文件和代码。我们需要：
+- 三个八度的钢琴键盘（C3-B5）
+- 支持键盘按键演奏
+- 支持鼠标点击演奏
+- 支持 MIDI 设备连接
+- 多种乐器音色（钢琴、吉他、竖琴）
+- 实时视觉反馈
 
-创建钢琴键盘组件
-实现 MIDI 连接和事件处理
-添加音频播放功能
-实现基本的 UI 样式
+## 键盘映射
 
-## 增加低八度音符
-我来帮您添加低八度的音符，需要修改键盘映射和音符数组。让我们先修正一下重复的 keyboardMap，然后添加低八度的按键映射：
+### 低八度 (C3-B3)：
+- 白键：
+  - Z -> C3
+  - X -> D3
+  - C -> E3
+  - V -> F3
+  - B -> G3
+  - N -> A3
+  - M -> B3
+- 黑键：
+  - A -> C#3
+  - S -> D#3
+  - F -> F#3
+  - G -> G#3
+  - H -> A#3
 
-现在让我们添加低八度的音符到 notes 数组：
+### 中央八度 (C4-B4)：
+- 白键：
+  - Q -> C4
+  - W -> D4
+  - E -> E4
+  - R -> F4
+  - T -> G4
+  - Y -> A4
+  - U -> B4
+- 黑键：
+  - 1 -> C#4
+  - 2 -> D#4
+  - 4 -> F#4
+  - 5 -> G#4
+  - 6 -> A#4
 
-现在需要调整后面所有音符的位置值，让我继续修改：
+### 高八度 (C5-E5)：
+- 白键：
+  - I -> C5
+  - O -> D5
+  - P -> E5
+- 黑键：
+  - 8 -> C#5
+  - 9 -> D#5
 
-最后调整钢琴键盘容器的宽度以适应新增的低八度：
+## 在线演示
 
-现在我已经完成了所有更改，包括：
+访问 [https://midikang.github.io/panio/](https://midikang.github.io/panio/) 体验在线演示。
 
-添加了低八度（C3-B3）的按键映射：
+## 本地开发
 
-Z -> C3
-X -> D3
-C -> E3
-V -> F3
-B -> G3
-N -> A3
-M -> B3 黑键：
-S -> C#3
-D -> D#3
-G -> F#3
-H -> G#3
-J -> A#3
-修改了中央八度（C4-B4）的按键映射：
+1. 克隆仓库：
+   ```bash
+   git clone https://github.com/midikang/panio.git
+   cd panio
+   ```
 
-Q -> C4
-W -> D4
-E -> E4
-R -> F4
-T -> G4
-Y -> A4
-U -> B4 黑键：
-2 -> C#4
-3 -> D#4
-5 -> F#4
-6 -> G#4
-7 -> A#4
-添加了低八度的音符到钢琴键盘显示
+2. 安装依赖：
+   ```bash
+   npm install
+   ```
 
-调整了所有音符的位置值以保持正确的间距
+3. 启动开发服务器：
+   ```bash
+   npm run dev
+   ```
 
-增加了钢琴键盘容器的宽度以适应新增的琴键
+4. 构建生产版本：
+   ```bash
+   npm run build
+   ```
 
-现在您可以：
+## 技术栈
 
-使用底排键盘（Z-M）演奏低八度
-使用中排键盘（Q-U）演奏中央八度
-使用数字键（2,3,5,6,7）和字母键（S,D,G,H,J）演奏黑键
-所有的琴键都支持：
+- Vue 3
+- Vite
+- WebMIDI API
+- Soundfont Player
 
-键盘按键演奏
-鼠标点击演奏
-MIDI 设备输入
+## 许可证
+
+MIT

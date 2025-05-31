@@ -31,13 +31,50 @@ import { WebMidi } from 'webmidi'
 import Soundfont from 'soundfont-player'
 
 export default {
-  name: 'PianoKeyboard',
-  data() {
+  name: 'PianoKeyboard',  data() {
     return {
       midiEnabled: false,
       activeNotes: [],
       currentInstrument: 'acoustic_grand_piano',
       player: null,
+      pressedKeys: new Set(),
+      keyboardMap: {
+        'a': 60, // C4
+        's': 62, // D4
+        'd': 64, // E4
+        'f': 65, // F4
+        'g': 67, // G4
+        'h': 69, // A4
+        'j': 71, // B4
+        'w': 61, // C#4
+        'e': 63, // D#4
+        't': 66, // F#4
+        'y': 68, // G#4
+        'u': 70, // A#4
+      },
+      // 添加键盘按键到MIDI音符的映射
+      keyboardMap: {
+        'a': 60, // C4
+        's': 62, // D4
+        'd': 64, // E4
+        'f': 65, // F4
+        'g': 67, // G4
+        'h': 69, // A4
+        'j': 71, // B4
+        // 第二个八度的按键映射
+        'k': 72, // C5
+        'l': 74, // D5
+        ';': 76, // E5
+        'w': 61, // C#4
+        'e': 63, // D#4
+        't': 66, // F#4
+        'y': 68, // G#4
+        'u': 70, // A#4
+        'o': 73, // C#5
+        'p': 75  // D#5
+      },
+      // 记录当前按下的键，防止重复触发
+      pressedKeys: new Set(),
       // 定义钢琴键的音符信息
       notes: [
         // 第一个八度的音符
@@ -72,6 +109,14 @@ export default {
   mounted() {
     // 初始化音频播放器
     this.initAudioPlayer()
+    // 添加键盘事件监听
+    window.addEventListener('keydown', this.handleKeyDown)
+    window.addEventListener('keyup', this.handleKeyUp)
+  },
+  beforeDestroy() {
+    // 移除键盘事件监听
+    window.removeEventListener('keydown', this.handleKeyDown)
+    window.removeEventListener('keyup', this.handleKeyUp)
   },
   methods: {
     async initAudioPlayer() {
@@ -117,6 +162,25 @@ export default {
       if (this.player) {
         this.player.stop(midiNumber)
       }
+    },
+    handleKeyDown(event) {
+      const key = event.key.toLowerCase()
+      // 如果按键已经被按下，或者不在映射中，则忽略
+      if (this.pressedKeys.has(key) || !this.keyboardMap[key]) {
+        return
+      }
+      
+      this.pressedKeys.add(key)
+      this.playNote(this.keyboardMap[key])
+    },
+    handleKeyUp(event) {
+      const key = event.key.toLowerCase()
+      if (!this.keyboardMap[key]) {
+        return
+      }
+      
+      this.pressedKeys.delete(key)
+      this.stopNote(this.keyboardMap[key])
     }
   },
   watch: {

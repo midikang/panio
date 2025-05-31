@@ -47,11 +47,11 @@ export default {
         'n': 57, // A3
         'm': 59, // B3
         // 黑键 (低八度)
-        's': 49, // C#3
-        'd': 51, // D#3
-        'g': 54, // F#3
-        'h': 56, // G#3
-        'j': 58, // A#3
+        'a': 49, // C#3
+        's': 51, // D#3
+        'f': 54, // F#3
+        'g': 56, // G#3
+        'h': 58, // A#3
         // 中央八度 (C4 - B4)
         'q': 60, // C4
         'w': 62, // D4
@@ -61,32 +61,19 @@ export default {
         'y': 69, // A4
         'u': 71, // B4
         // 黑键 (中央八度)
-        '2': 61, // C#4
-        '3': 63, // D#4
-        '5': 66, // F#4
-        '6': 68, // G#4
-        '7': 70, // A#4
-        'a': 60, // C4
-        's': 62, // D4
-        'd': 64, // E4
-        'f': 65, // F4
-        'g': 67, // G4
-        'h': 69, // A4
-        'j': 71, // B4
-        // 第二个八度的按键映射
-        'k': 72, // C5
-        'l': 74, // D5
-        ';': 76, // E5
-        'w': 61, // C#4
-        'e': 63, // D#4
-        't': 66, // F#4
-        'y': 68, // G#4
-        'u': 70, // A#4
-        'o': 73, // C#5
-        'p': 75  // D#5
-      },
-      // 记录当前按下的键，防止重复触发
-      pressedKeys: new Set(),      // 定义钢琴键的音符信息
+        '1': 61, // C#4
+        '2': 63, // D#4
+        '4': 66, // F#4
+        '5': 68, // G#4
+        '6': 70, // A#4
+        // 高八度 (C5-E5)
+        'i': 72, // C5
+        'o': 74, // D5
+        'p': 76, // E5
+        // 黑键 (高八度)
+        '8': 73, // C#5
+        '9': 75, // D#5
+      },// 定义钢琴键的音符信息
       notes: [
         // 低八度的音符 (C3 - B3)
         { midi: 48, name: 'C3', type: 'white', position: 0 },
@@ -99,9 +86,9 @@ export default {
         { midi: 55, name: 'G3', type: 'white', position: 200 },
         { midi: 56, name: 'G#3', type: 'black', position: 235 },
         { midi: 57, name: 'A3', type: 'white', position: 250 },
-        { midi: 58, name: 'A#3', type: 'black', position: 285 },
-        { midi: 59, name: 'B3', type: 'white', position: 300 },
-        // 中央八度的音符 (C4 - B4)        { midi: 60, name: 'C4', type: 'white', position: 350 },
+        { midi: 58, name: 'A#3', type: 'black', position: 285 },        { midi: 59, name: 'B3', type: 'white', position: 300 },
+        // 中央八度的音符 (C4 - B4)
+        { midi: 60, name: 'C4', type: 'white', position: 350 },
         { midi: 61, name: 'C#4', type: 'black', position: 385 },
         { midi: 62, name: 'D4', type: 'white', position: 400 },
         { midi: 63, name: 'D#4', type: 'black', position: 435 },

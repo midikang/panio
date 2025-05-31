@@ -8,13 +8,18 @@ export default defineConfig({
   build: {
     outDir: 'dist', // 输出目录
     assetsDir: 'assets', // 静态资源目录
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    },
     // 生产环境移除 console
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true,
-      },
-    },
-  },
+        drop_debugger: true
+      }
+    }
+  }
 })
